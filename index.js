@@ -1,5 +1,8 @@
 
 
-module.exports = function(request, response, next) {
+module.exports = function(props) {
+  return function(req, res, next) {
+
+  };
   next();
 };
