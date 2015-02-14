@@ -1,0 +1,27 @@
+{
+  "name": "express-request-language",
+  "version": "1.0.0",
+  "description": "Figure out a request's language tag by parsing Accept-Language header and stored cookies.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tinganho/express-request-language.git"
+  },
+  "keywords": [
+    "i18n",
+    "http",
+    "accept-language"
+  ],
+  "author": "Tingan Ho",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tinganho/express-request-language/issues"
+  },
+  "homepage": "https://github.com/tinganho/express-request-language",
+  "dependencies": {
+    "accept-language": "^2.0.6"
+  }
+}

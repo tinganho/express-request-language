@@ -1,0 +1,7 @@
+specifications
+binaries
+bin
+.travis.yml
+Gruntfile.js
+.gitignore
+.editorconfig
