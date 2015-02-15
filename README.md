@@ -76,7 +76,7 @@ Setting the cookie property is optional and whenever it is set this middleware w
 Name of the language cookie. It will store the current language tag of the user's session and remain until `maxAge` expires or changed by `cookie.url`.
 
 ##### cookie.options (optional)
-The options are the same options as express uses in `res.cooke(name, value. options)`. Please checkout their [documentation](http://expressjs.com/4x/api.html#res.cookie).
+The options are the same options as express uses in `res.cookie(name, value. options)`. Please checkout their [documentation](http://expressjs.com/4x/api.html#res.cookie).
 
 ##### cookie.url (optional)
 Set the change language URL. Lets say that you set the value to `/languages/{language}` in your configurations. If you visit with your browser to `/languages/en-US`. It will actually change your language cookie value to `en-US`.
