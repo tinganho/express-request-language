@@ -1,6 +1,5 @@
-specifications
-binaries
 bin
+test
 .travis.yml
 Gruntfile.js
 .gitignore

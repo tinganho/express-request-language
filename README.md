@@ -1,6 +1,6 @@
 request-language [![Build Status](https://travis-ci.org/tinganho/express-request-language.png)](https://travis-ci.org/tinganho/express-request-language)
 ========================
-A middleware to figure out your request's language either by parsing `Accept-Language` header or by looking at a language cookie's value. `request-language` plays nicely with [L10ns][] by abstracting all our language setting logic for you.
+A middleware to figure out your request's language either by parsing `Accept-Language` header or by looking at a language cookie's value. `request-language` plays nicely with [L10ns][] by abstracting all your language setting logic for you.
 
 ### Installation:
 
@@ -20,7 +20,7 @@ app.use(requestLanguage({
   cookie: {
     name: 'language',
     options: { maxAge: 24*3600*1000 },
-    url: '/languages/{language}',
+    url: '/languages/{language}'
   }
 }));
 ...
@@ -39,7 +39,7 @@ app.use(requestLanguage({
   cookie: {
     name: 'language',
     options: { maxAge: 24*3600*1000 },
-    url: '/languages/{language}',
+    url: '/languages/{language}'
   },
   localizations: localizations
 }));

@@ -1,10 +1,10 @@
 {
-  "name": "express-request-language",
+  "name": "connect-language",
   "version": "1.0.0",
   "description": "Figure out a request's language tag by parsing Accept-Language header and stored cookies.",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "bin/test"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,12 @@
   },
   "homepage": "https://github.com/tinganho/express-request-language",
   "dependencies": {
-    "accept-language": "^2.0.6"
+    "accept-language": "^2.0.7"
+  },
+  "devDependencies": {
+    "chai": "^2.0.0",
+    "mocha": "^2.1.0",
+    "sinon": "^1.12.2",
+    "sinon-chai": "^2.7.0"
   }
 }
