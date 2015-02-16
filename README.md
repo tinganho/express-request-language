@@ -88,7 +88,9 @@ Set the change language URL. Lets say that you set the value to `/languages/{lan
 Set the [L10ns][] `requireLocalizations(language)` function. The right language tag will be used and automatically figured out by the `request-language`. [L10ns'][L10ns] `l()` function will be accessible through express' `req.localizations`. You also need to set a scoped `l` variable before usage, otherwise [L10ns][] can't update localization keys through code traversal:
 
 ```javascript
-var l = req.localizations;
+app.get('/', function(req, res, next) {
+  var l = req.localizations;
+});
 ```
 ### Maintainer
 
