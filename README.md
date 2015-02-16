@@ -32,6 +32,7 @@ app.use(requestLanguage({
 
 ```javascript
 var requestLanguage = require('express-request-language');
+var cookieParser = require('cookie-parser');
 var express = require('express');
 var localizations = require('path/to/l10ns/output/all');
 var app = express();
