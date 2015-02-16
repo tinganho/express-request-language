@@ -70,7 +70,7 @@ language[-script][-region]
 Which makes the following language tags `en`, `en-US` and `zh-Hant-TW` all [BCP47][] compliant. Please note that the script tag refers to language script. Some languages use two character sets instead of one. Chinese is a good example of having two character sets instead of one–it has both traditional characters and simplified characters. And for popular languages that uses two or more scripts please specify the script subtag, because it can make an i18n library fetch more specific locale data.
 
 #### cookie (optional) \{Object\}
-Setting the cookie property is optional and whenever it is set this middleware will look at the cookie value instead of the `Accept-Language` header. Setting this cookie property is ideal for application that support more than 1 language and allows users to change language.
+Setting the cookie property is optional and whenever it is set this middleware will look at the cookie value instead of the `Accept-Language` header. Setting this cookie property is ideal for application that support more than 1 language and allows users to change language. This option requires that you uses express' cookie middleware [cookie-parser](https://github.com/expressjs/cookie-parser).
 
 ##### cookie.name
 Name of the language cookie. It will store the current language tag of the user's session and remain until `maxAge` expires or changed by `cookie.url`.
