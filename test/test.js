@@ -8,6 +8,7 @@ var chai = require('chai');
 var expect = require('chai').expect;
 var sinonChai = require('sinon-chai');
 var spy = sinon.spy;
+var stub = sinon.stub;
 var noop = function() {};
 
 
@@ -55,7 +56,7 @@ describe('request-language', function() {
     });
     var req = getRequest('');
     middleware(req, res, next);
-    expect(req.locals.language).to.equal('en-US');
+    expect(req.language).to.equal('en-US');
   });
 
   it('should be able to set a named cookie', function() {
@@ -112,8 +113,25 @@ describe('request-language', function() {
     var res = { cookie: spy() };
     middleware(req, res, next);
     res.cookie.should.have.not.been.called;
-    expect(req.locals.language).to.equal('zh-CN');
+    expect(req.language).to.equal('zh-CN');
     expect(req.cookies.language).to.equal('zh-CN');
+  });
+
+  it('should set a new cookie if the cookie is not in the language set', function() {
+    var middleware = requestLangauge({
+      languages: ['en-US', 'zh-CN'],
+      cookie: {
+        name: 'language',
+        options: {}
+      }
+    });
+    var req = getRequest('zh-CN;q=0.8,en-US;q=1', 'en-GB');
+    var res = { cookie: spy() };
+    middleware(req, res, next);
+    res.cookie.should.have.been.called;
+    res.cookie.should.have.been.calledWith('language', 'en-US', {});
+    expect(req.language).to.equal('en-US');
+    expect(req.cookies.language).to.equal('en-US');
   });
 
   it('should be able to set a cookie url', function() {
@@ -138,13 +156,14 @@ describe('request-language', function() {
   it('should be able to set a localization(language) function with no stored cookie and no cookie setting', function() {
     var props = {
       languages: ['en-US', 'zh-CN'],
-      localizations: spy()
+      localizations: stub().returns(noop)
     };
     var middleware = requestLangauge(props);
     var req = getRequest('zh-CN;q=0.8,en-US;q=1');
     middleware(req, res, next);
     props.localizations.should.have.been.calledOnce;
     props.localizations.should.have.been.calledWith('en-US');
+    expect(req.localizations).to.be.a('function');
   });
 
   it('should be able to set a localization(language) function with no stored cookie and with cookie setting', function() {
@@ -154,13 +173,14 @@ describe('request-language', function() {
         name: 'language',
         options: {}
       },
-      localizations: spy()
+      localizations: stub().returns(noop)
     };
     var middleware = requestLangauge(props);
     var req = getRequest('zh-CN;q=0.8,en-US;q=1');
     middleware(req, res, next);
     props.localizations.should.have.been.calledOnce;
     props.localizations.should.have.been.calledWith('en-US');
+    expect(req.localizations).to.be.a('function');
   });
 
   it('should be able to set a localization(language) function with a stored cookie', function() {
@@ -170,12 +190,69 @@ describe('request-language', function() {
         name: 'language',
         options: {}
       },
-      localizations: spy()
+      localizations: stub().returns(noop)
     };
     var middleware = requestLangauge(props);
     var req = getRequest('zh-CN;q=0.8,en-US;q=1', 'zh-CN');
     middleware(req, res, next);
     props.localizations.should.have.been.calledOnce;
     props.localizations.should.have.been.calledWith('zh-CN');
+    expect(req.localizations).to.be.a('function');
+  });
+
+  it('should throw an error if the languages option is not set', function() {
+    var props = {
+    };
+    var method = function() {
+      requestLangauge(props);
+    };
+    expect(method).to.throw('You must define your languages in an array of strings');
+  });
+
+  it('should throw an error if the languages option is set but isn\'t bcp47 compliant', function() {
+    var props = {
+      languages: ['en-US', 'e']
+    };
+    var method = function() {
+      requestLangauge(props);
+    };
+    expect(method).to.throw('Your language tag \'e\' is not BCP47 compliant. For more info https://tools.ietf.org/html/bcp47.');
+  });
+
+  it('should throw an error if the localizations settings is not of type array', function() {
+    var props = {
+      languages: ['en-US'],
+      localizations: []
+    };
+    var method = function() {
+      requestLangauge(props);
+    };
+    expect(method).to.throw('Your \'localizations\' setting is not of type function.');
+  });
+
+  it('should throw an error if cookie is set but not cookie.name', function() {
+    var props = {
+      languages: ['en-US', 'zh-CN'],
+      cookie: {
+      }
+    };
+    var method = function() {
+      requestLangauge(props);
+    };
+    expect(method).to.throw('cookie.name setting must be of type string have a length bigger than zero.');
+  });
+
+  it('should throw an error if the localizations settings is not of type array', function() {
+    var props = {
+      languages: ['en-US'],
+      cookie: {
+        name: 'language',
+        url: '/'
+      }
+    };
+    var method = function() {
+      requestLangauge(props);
+    };
+    expect(method).to.throw('You haven\'t defined the markup `{language}` in your cookie.url settings.');
   });
 });

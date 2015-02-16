@@ -22,10 +22,13 @@
   },
   "homepage": "https://github.com/tinganho/express-request-language",
   "dependencies": {
-    "accept-language": "^2.0.7"
+    "accept-language": "^2.0.7",
+    "bcp47": "^1.1.2"
   },
   "devDependencies": {
     "chai": "^2.0.0",
+    "cookie-parser": "^1.3.4",
+    "express": "^4.11.2",
     "mocha": "^2.1.0",
     "sinon": "^1.12.2",
     "sinon-chai": "^2.7.0"
