@@ -12,9 +12,11 @@ npm install express-request-language --save
 
 ```javascript
 var requestLanguage = require('express-request-language');
+var cookieParser = require('cookie-parser');
 var express = require('express');
 var app = express();
 
+app.use(cookieParser());
 app.use(requestLanguage({
   languages: ['en-US', 'zh-CN'],
   cookie: {
@@ -34,6 +36,7 @@ var express = require('express');
 var localizations = require('path/to/l10ns/output/all');
 var app = express();
 
+app.use(cookieParser());
 app.use(requestLanguage({
   languages: ['en-US', 'zh-CN'],
   cookie: {
