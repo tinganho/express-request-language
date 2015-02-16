@@ -82,10 +82,10 @@ The options are the same options as express uses in `res.cookie(name, value. opt
 Set the change language URL. Lets say that you set the value to `/languages/{language}` in your configurations. If you visit with your browser to `/languages/en-US`. It will actually change your language cookie value to `en-US`.
 
 #### localizations (optional) {Function}
-Set the [L10ns][] `requireLocalizations(language)` function. The right language tag will be used and automatically figured out by the `request-language`. [L10ns'][L10ns] `l()` function will be accessible through express' `req.locals.l`. You also need to set a scoped `l` variable before usage, otherwise [L10ns][] can't update localization keys through code traversal:
+Set the [L10ns][] `requireLocalizations(language)` function. The right language tag will be used and automatically figured out by the `request-language`. [L10ns'][L10ns] `l()` function will be accessible through express' `req.localizations`. You also need to set a scoped `l` variable before usage, otherwise [L10ns][] can't update localization keys through code traversal:
 
 ```javascript
-var l = req.locals.l;
+var l = req.localizations;
 ```
 ### Maintainer
 
@@ -93,8 +93,6 @@ Tingan Ho [@tingan87][]
 
 ### License
 MIT
-
-
 
 [L10ns]: http://l10ns.org
 [BCP47]: https://tools.ietf.org/html/bcp47
