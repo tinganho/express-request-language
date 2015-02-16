@@ -83,7 +83,7 @@ Name of the language cookie. It will store the current language tag of the user'
 The options are the same options as express uses in `res.cookie(name, value. options)`. Please checkout their [documentation](http://expressjs.com/4x/api.html#res.cookie).
 
 ##### cookie.url (optional)
-Set the change language URL. Lets say that you set the value to `/languages/{language}` in your configurations. If you visit with your browser to `/languages/en-US`. It will actually change your language cookie value to `en-US`.
+Set the change language URL. Lets say that you set the value to `/languages/{language}` in your configurations. If you visit with your browser the URL path `/languages/en-US`. It will change your language cookie value to `en-US`. It will redirect back to the origin URL if you send a referrer header and default to `/` if it don't send a referrer header.
 
 #### localizations (optional) {Function}
 Set the [L10ns][] `requireLocalizations(language)` function. The right language tag will be used and automatically figured out by the `request-language`. [L10ns'][L10ns] `l()` function will be accessible through express' `req.localizations`. You also need to set a scoped `l` variable before usage, otherwise [L10ns][] can't update localization keys through code traversal:
