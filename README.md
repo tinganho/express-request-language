@@ -9,6 +9,7 @@ npm install express-request-language --save
 ```
 
 ### Usage
+Use it as a middleware to express. All options are described below. Your language will be accessed with `req.language`.
 
 ```javascript
 var requestLanguage = require('express-request-language');
@@ -25,11 +26,15 @@ app.use(requestLanguage({
     url: '/languages/{language}'
   }
 }));
+
+app.get('/', function(req, res, next) {
+  console.log(req.language); // 'en-US'
+});
 ...
 ```
 
 ### Usage with [L10ns](http://l10ns.org)
-
+Access all your localizations in `req.localizations`.
 ```javascript
 var requestLanguage = require('express-request-language');
 var cookieParser = require('cookie-parser');
@@ -50,7 +55,7 @@ app.use(requestLanguage({
 
 app.get('/', function(req, res, next) {
   // It will use localization from the right language.
-  var l = req.locals.l;
+  var l = req.localizations;
   console.log(l('HELLO_WORLD'));
 });
 ...
