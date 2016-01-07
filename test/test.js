@@ -7,6 +7,7 @@ var sinon = require('sinon');
 var chai = require('chai');
 var expect = require('chai').expect;
 var sinonChai = require('sinon-chai');
+var assign = require('lodash/object/assign');
 var spy = sinon.spy;
 var stub = sinon.stub;
 var noop = function() {};
@@ -34,7 +35,7 @@ function getRequest(acceptLanguage, storedLanguage) {
     acceptLanguage = options.acceptLanguage;
   }
 
-  return Object.assign({
+  return assign({
     locals: {},
     headers: {
       'accept-langauge': acceptLanguage
