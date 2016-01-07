@@ -27,7 +27,14 @@ chai.use(sinonChai);
  * @private
  */
 function getRequest(acceptLanguage, storedLanguage) {
-  return {
+  var args = [].slice.call(arguments);
+  var options = typeof args[0] === 'object' ? args[0] : {}
+
+  if (Object.keys(options).length) {
+    acceptLanguage = options.acceptLanguage;
+  }
+
+  return Object.assign({
     locals: {},
     headers: {
       'accept-langauge': acceptLanguage
@@ -35,8 +42,9 @@ function getRequest(acceptLanguage, storedLanguage) {
     cookies: {
       language: storedLanguage
     },
+    query: {},
     cookie: noop
-  };
+  }, options);
 };
 
 var next = function() {};
@@ -254,5 +262,42 @@ describe('request-language', function() {
       requestLangauge(props);
     };
     expect(method).to.throw('You haven\'t defined the markup `{language}` in your cookie.url settings.');
+  });
+
+  it('should set the language requested in the query string', function() {
+    var middleware = requestLangauge({
+      languages: ['en-US', 'zh-CN'],
+      cookie: {
+        name: 'language'
+      }
+    });
+    var req = getRequest({
+      acceptLanguage: 'en-US;q=1',
+      query: {
+        language: 'zh-CN'
+      }
+    });
+
+    middleware(req, res, next);
+    expect(req.cookies.language).to.equal('zh-CN');
+  });
+
+  it('should be able to use a custom query string name', function() {
+    var middleware = requestLangauge({
+      languages: ['en-US', 'zh-CN'],
+      queryName: 'locale',
+      cookie: {
+        name: 'language'
+      }
+    });
+    var req = getRequest({
+      acceptLanguage: 'en-US;q=1',
+      query: {
+        locale: 'zh-CN'
+      }
+    });
+
+    middleware(req, res, next);
+    expect(req.cookies.language).to.equal('zh-CN');
   });
 });

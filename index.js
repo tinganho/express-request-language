@@ -71,6 +71,16 @@ module.exports = function(props) {
 
   return function(req, res, next) {
     var language;
+    var queryName = props.queryName || 'language';
+    var queryLanguage = req.query[queryName];
+
+    if(typeof queryLanguage === 'string' && queryLanguage.length > 1) {
+      set(props, req, language);
+      req.cookies[props.cookie.name] = queryLanguage;
+      res.cookie(props.cookie.name, queryLanguage, props.cookie.options);
+      return next();
+    }
+
     if(typeof props.cookie !== 'undefined') {
       if(typeof props.cookie.url === 'string') {
         changeLanguageURL.index = 0;
