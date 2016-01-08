@@ -300,7 +300,7 @@ describe('request-language', function() {
 
     middleware(req, res, next);
     expect(req.cookies.language).not.to.equal('zh-CN');
-    // expect(req.language).not.to.equal('zh-CN');
+    expect(req.language).not.to.equal('zh-CN');
   });
 
   it('should be able to use a custom query string name', function() {
