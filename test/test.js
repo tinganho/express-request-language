@@ -322,4 +322,32 @@ describe('request-language', function() {
     expect(req.cookies.language).to.equal('zh-CN');
     expect(req.language).to.equal('zh-CN');
   });
+
+  it('should unset language for `default` in querystring', function() {
+    var defaultLanguage = 'en-US';
+    var middleware = requestLanguage({
+      languages: ['en-US', 'zh-CN'],
+      cookie: {
+        name: 'language'
+      }
+    });
+    var req = getRequest({
+      acceptLanguage: 'en-US;q=1',
+      query: {
+        language: 'default'
+      },
+      cookies: {
+        language: 'zh-CN'
+      }
+    });
+    var response = {
+      clearCookie: spy(),
+      cookie: noop
+    };
+
+    middleware(req, response, next);
+
+    response.clearCookie.should.have.been.calledWith('language');
+    expect(req.language).to.equal(defaultLanguage);
+  });
 });
