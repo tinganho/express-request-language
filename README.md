@@ -91,7 +91,7 @@ The options are the same options as express uses in `res.cookie(name, value. opt
 Set the change language URL. Lets say that you set the value to `/languages/{language}` in your configurations. If you visit with your browser the URL path `/languages/en-US`. It will change your language cookie value to `en-US`. It will redirect back to the origin URL if you send a referrer header and default to `/` if it don't send a referrer header.
 
 #### queryName (optional) \{Object\}
-You can optionally set the language using a query string. This option allows you to set the name of the query parameter that triggers the language setting.
+You can optionally set the language using a query string. This option allows you to set the name of the query parameter that triggers the language setting. The default value is `language`.
 
 ```js
 var middleware = requestLangauge({

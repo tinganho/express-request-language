@@ -266,7 +266,7 @@ describe('request-language', function() {
   });
 
   it('should set the language requested in the query string', function() {
-    var middleware = requestLangauge({
+    var middleware = requestLanguage({
       languages: ['en-US', 'zh-CN'],
       cookie: {
         name: 'language'
@@ -281,10 +281,30 @@ describe('request-language', function() {
 
     middleware(req, res, next);
     expect(req.cookies.language).to.equal('zh-CN');
+    expect(req.language).to.equal('zh-CN');
+  });
+
+  it('should not set unsupported language from query string', function() {
+    var middleware = requestLanguage({
+      languages: ['en-US'],
+      cookie: {
+        name: 'language'
+      }
+    });
+    var req = getRequest({
+      acceptLanguage: 'en-US;q=1',
+      query: {
+        language: 'zh-CN'
+      }
+    });
+
+    middleware(req, res, next);
+    expect(req.cookies.language).not.to.equal('zh-CN');
+    // expect(req.language).not.to.equal('zh-CN');
   });
 
   it('should be able to use a custom query string name', function() {
-    var middleware = requestLangauge({
+    var middleware = requestLanguage({
       languages: ['en-US', 'zh-CN'],
       queryName: 'locale',
       cookie: {
@@ -300,5 +320,6 @@ describe('request-language', function() {
 
     middleware(req, res, next);
     expect(req.cookies.language).to.equal('zh-CN');
+    expect(req.language).to.equal('zh-CN');
   });
 });
