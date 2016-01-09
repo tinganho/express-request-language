@@ -90,6 +90,19 @@ The options are the same options as express uses in `res.cookie(name, value. opt
 ##### cookie.url (optional)
 Set the change language URL. Lets say that you set the value to `/languages/{language}` in your configurations. If you visit with your browser the URL path `/languages/en-US`. It will change your language cookie value to `en-US`. It will redirect back to the origin URL if you send a referrer header and default to `/` if it don't send a referrer header.
 
+#### queryName (optional) \{Object\}
+You can optionally set the language using a query string. This option allows you to set the name of the query parameter that triggers the language setting. The default value is `language`.
+
+```js
+var middleware = requestLangauge({
+  languages: ['en-US', 'zh-CN'],
+  queryName: 'locale', // ?locale=zh-CN will set the language to 'zh-CN'
+  cookie: {
+    name: 'language'
+  }
+});
+```
+
 #### localizations (optional) {Function}
 Set the [L10ns][] `requireLocalizations(language)` function. The right language tag will be used and automatically figured out by `request-language`. [L10ns'][L10ns] `l()` function will be accessible through express' `req.localizations`. You also need to set a scoped `l` variable before usage, otherwise [L10ns][] can't update localization keys through code traversal:
 
