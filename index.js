@@ -82,6 +82,11 @@ module.exports = function(props) {
       return next();
     }
 
+    if(queryLanguage === 'default') {
+      res.clearCookie(props.cookie.name);
+      req.cookies[props.cookie.name] = undefined;
+    }
+
     if(typeof props.cookie !== 'undefined') {
       if(typeof props.cookie.url === 'string') {
         changeLanguageURL.index = 0;

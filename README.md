@@ -93,6 +93,8 @@ Set the change language URL. Lets say that you set the value to `/languages/{lan
 #### queryName (optional) \{Object\}
 You can optionally set the language using a query string. This option allows you to set the name of the query parameter that triggers the language setting. The default value is `language`.
 
+The selected language can be unset by setting the language parameter to `default`.
+
 ```js
 var middleware = requestLangauge({
   languages: ['en-US', 'zh-CN'],
