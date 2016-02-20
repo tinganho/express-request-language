@@ -91,12 +91,13 @@ module.exports = function(props) {
       if(typeof props.cookie.url === 'string') {
         changeLanguageURL.index = 0;
         var match = changeLanguageURL.exec(req.url);
-        if(match !== null && props.languages.indexOf(match[1]) !== -1) {
-          res.cookie(props.cookie.name, match[1], props.cookie.options);
-          return res.redirect('back');
-        }
-        else {
-          return res.status(404).send('The language ' + match[1] + ' is not supported');
+        if (match != null) {
+          if (props.languages.indexOf(match[1]) !== -1) {
+            res.cookie(props.cookie.name, match[1], props.cookie.options);
+            return res.redirect('back');
+          } else {
+            return res.status(404).send('The language ' + match[1] + ' is not supported')
+          }
         }
       }
 
