@@ -180,7 +180,7 @@ describe('request-language', function() {
     status.should.have.been.calledOnce;
     status.should.have.been.calledWith(404);
     send.should.have.been.calledOnce;
-    send.should.have.been.calledWith('The language notSupportedLanguage is not supported');
+    send.should.have.been.calledWith('The language \'notSupportedLanguage\' is not supported.');
   });
 
   it('should be able to set a localization(language) function with no stored cookie and no cookie setting', function() {
