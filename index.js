@@ -96,7 +96,7 @@ module.exports = function(props) {
             res.cookie(props.cookie.name, match[1], props.cookie.options);
             return res.redirect('back');
           } else {
-            return res.status(404).send('The language ' + match[1] + ' is not supported')
+            return res.status(404).send('The language \'' + match[1] + '\' is not supported.')
           }
         }
       }
