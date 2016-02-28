@@ -77,8 +77,10 @@ module.exports = function(props) {
     if(typeof queryLanguage === 'string' && queryLanguage.length > 1 &&
         props.languages.indexOf(queryLanguage) !== -1) {
       set(props, req, queryLanguage);
-      req.cookies[props.cookie.name] = queryLanguage;
-      res.cookie(props.cookie.name, queryLanguage, props.cookie.options);
+      if(typeof props.cookie !== 'undefined') {
+        req.cookies[props.cookie.name] = queryLanguage;
+        res.cookie(props.cookie.name, queryLanguage, props.cookie.options);
+      }
       return next();
     }
 
