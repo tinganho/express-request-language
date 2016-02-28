@@ -371,4 +371,19 @@ describe('request-language', function() {
     response.clearCookie.should.have.been.calledWith('language');
     expect(req.language).to.equal(defaultLanguage);
   });
+
+  it('should set language from query string if cookie options are not specified', function () {
+    var middleware = requestLanguage({
+      languages: ['en-US', 'zh-CN']
+    });
+    var req = getRequest({
+      acceptLanguage: 'en-US;q=1',
+      query: {
+        language: 'zh-CN'
+      }
+    });
+
+    middleware(req, res, next);
+    expect(req.language).to.equal('zh-CN');
+  });
 });
