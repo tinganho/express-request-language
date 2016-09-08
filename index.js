@@ -66,7 +66,6 @@ module.exports = function(props) {
   if(typeof props.localizations !== 'undefined' && typeof props.localizations !== 'function') {
     throw new TypeError('Your \'localizations\' setting is not of type function.');
   }
-
   acceptLanguage.languages(props.languages);
 
   return function(req, res, next) {
