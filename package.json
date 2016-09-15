@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/tinganho/express-request-language",
   "dependencies": {
+    "@types/express": "^4.0.32",
     "accept-language": "^3.0.4",
     "bcp47": "^1.1.2"
   },
