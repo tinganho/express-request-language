@@ -1,7 +1,7 @@
 
 import * as e from '@types/express';
 
-declare module 'express-request-language' {
+declare namespace ExpressRequestLanguage {
     interface Cookie {
 
         /**
@@ -44,9 +44,7 @@ declare module 'express-request-language' {
         localizations?: (lang: string) => any;
     }
 
-    /**
-     * Middleware for language matching.
-     */
-    function requestLanguage(options: Options): any;
-    export = requestLanguage;
+    export function requestLanguage(options: ExpressRequestLanguage.Options): any;
 }
+
+export = ExpressRequestLanguage.requestLanguage;
