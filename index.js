@@ -68,7 +68,7 @@ module.exports = function(props) {
   }
   acceptLanguage.languages(props.languages);
 
-  return function(req, res, next) {
+  return function expressRequestLanguage(req, res, next) {
     var language;
     var queryName = props.queryName || 'language';
     var queryLanguage = req.query[queryName];
