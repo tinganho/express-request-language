@@ -1,5 +1,5 @@
 
-import * as e from '@types/express';
+import * as e from 'express';
 
 declare namespace ExpressRequestLanguage {
     interface Cookie {
