@@ -48,3 +48,13 @@ declare namespace requestLanguage {
 declare function requestLanguage(options: requestLanguage.Options): any;
 
 export = requestLanguage;
+
+declare global {
+    namespace Express {
+        export interface Request {
+            language?: string;
+            localizations?: any;
+        }
+    }
+}
+
