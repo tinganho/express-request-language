@@ -44,7 +44,16 @@ declare namespace ExpressRequestLanguage {
         localizations?: (lang: string) => any;
     }
 
-    export function requestLanguage(options: ExpressRequestLanguage.Options): any;
 }
 
-export = ExpressRequestLanguage.requestLanguage;
+declare function requestLanguage(options: ExpressRequestLanguage.Options): any;
+export = requestLanguage;
+
+declare global {
+    namespace Express {
+        export interface Request {
+            language: string;
+            localizations?: any;
+        }
+    }
+}
