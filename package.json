@@ -1,6 +1,6 @@
 {
   "name": "express-request-language",
-  "version": "1.1.12",
+  "version": "1.1.13",
   "description": "Figure out a request's language tag by parsing Accept-Language header and stored cookies.",
   "main": "index.js",
   "scripts": {
