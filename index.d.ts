@@ -47,6 +47,7 @@ declare namespace ExpressRequestLanguage {
 }
 
 declare function requestLanguage(options: ExpressRequestLanguage.Options): any;
+declare namespace requestLanguage { }
 export = requestLanguage;
 
 declare global {
