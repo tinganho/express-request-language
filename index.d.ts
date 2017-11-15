@@ -43,7 +43,6 @@ declare namespace ExpressRequestLanguage {
          */
         localizations?: (lang: string) => any;
     }
-
 }
 
 declare function requestLanguage(options: ExpressRequestLanguage.Options): any;
