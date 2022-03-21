@@ -96,7 +96,7 @@ You can optionally set the language using a query string. This option allows you
 The selected language can be unset by setting the language parameter to `default`.
 
 ```js
-var middleware = requestLangauge({
+var middleware = requestLanguage({
   languages: ['en-US', 'zh-CN'],
   queryName: 'locale', // ?locale=zh-CN will set the language to 'zh-CN'
   cookie: {
